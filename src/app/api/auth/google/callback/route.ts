@@ -50,8 +50,9 @@ export async function GET(req: NextRequest) {
   const googleUser = await userRes.json()
   const email: string = googleUser.email
   const username: string = googleUser.name ?? email.split('@')[0]
-  // Replicate Flutter: password = sha256(google sub/id)
-  const password = sha256(googleUser.id)
+  // Deterministic password for Google-created accounts.
+  // The backend password policy requires uppercase, lowercase, number and symbol.
+  const password = `Gg1!${sha256(googleUser.id)}`
 
   // Try login, fallback to register+login
   let fitmarkLogin = await fetch(`${FITMARK_BASE_URL}${endpoints.login}`, {
@@ -62,11 +63,16 @@ export async function GET(req: NextRequest) {
 
   if (!fitmarkLogin.ok) {
     // Register the user
-    await fetch(`${FITMARK_BASE_URL}${endpoints.register}`, {
+    const registerRes = await fetch(`${FITMARK_BASE_URL}${endpoints.register}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, email, password }),
     })
+
+    if (!registerRes.ok && registerRes.status !== 409) {
+      return NextResponse.redirect(`${appUrl}/login?error=fitmark_register_failed`)
+    }
+
     fitmarkLogin = await fetch(`${FITMARK_BASE_URL}${endpoints.login}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

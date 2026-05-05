@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Dumbbell, Mail, Lock, Eye, EyeOff } from 'lucide-react'
@@ -25,6 +25,22 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search)
+    const googleError = searchParams.get('error')
+    if (!googleError) return
+
+    const messages: Record<string, string> = {
+      google_cancelled: 'Login com Google cancelado.',
+      google_token_failed: 'Não foi possível validar o login com Google.',
+      google_userinfo_failed: 'Não foi possível buscar seus dados do Google.',
+      fitmark_register_failed: 'Não foi possível criar sua conta FitMark com Google.',
+      fitmark_auth_failed: 'Não foi possível entrar no FitMark com essa conta Google.',
+    }
+
+    setError(messages[googleError] ?? 'Erro ao entrar com Google.')
+  }, [])
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()
