@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-light-bg dark:bg-dark-bg text-light-onBg dark:text-dark-onBg;
+  }
+
+  * {
+    @apply border-light-outline dark:border-dark-outline;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-light-outline dark:bg-dark-outline;
+  }
+}
+
+@layer utilities {
+  .font-rajdhani {
+    font-family: 'Rajdhani', sans-serif;
+  }
+}
