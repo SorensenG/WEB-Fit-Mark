@@ -62,9 +62,18 @@ export default function PerfilPage() {
           <p className="mt-2 text-sm text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant">
             Sua sessão pode ter ficado parada por um tempo. Tente renovar os dados.
           </p>
-          <Button className="mt-5" onClick={() => refetch()}>
-            Tentar novamente
-          </Button>
+          <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <Button onClick={() => refetch()}>
+              Tentar novamente
+            </Button>
+            <Button
+              variant="outline"
+              onClick={handleLogout}
+              isLoading={loggingOut}
+            >
+              Sair
+            </Button>
+          </div>
         </div>
       </div>
     )
