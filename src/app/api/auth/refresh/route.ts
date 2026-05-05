@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { FITMARK_BASE_URL, endpoints } from '@/lib/api/endpoints'
-import { getTokens, setTokenCookies, clearTokenCookies } from '@/lib/auth'
+import { getTokens, setTokenCookies } from '@/lib/auth'
+
+export const dynamic = 'force-dynamic'
 
 export async function POST() {
   const { refresh } = getTokens()
@@ -12,12 +14,11 @@ export async function POST() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ refreshToken: refresh }),
+    cache: 'no-store',
   })
 
   if (!upstream.ok) {
-    const res = NextResponse.json({ message: 'Sessão expirada' }, { status: 401 })
-    clearTokenCookies(res)
-    return res
+    return NextResponse.json({ message: 'Sessão expirada' }, { status: 401 })
   }
 
   const data = await upstream.json()

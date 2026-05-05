@@ -14,7 +14,7 @@ export class ApiError extends Error {
 
 let refreshPromise: Promise<boolean> | null = null
 
-async function refreshSession() {
+export async function refreshSession() {
   if (!refreshPromise) {
     refreshPromise = fetch('/api/auth/refresh', {
       method: 'POST',

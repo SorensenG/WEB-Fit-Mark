@@ -2,16 +2,20 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 const PUBLIC_PATHS = ['/login', '/register', '/forgot-password']
-const AUTH_PATHS = ['/api/auth/']
+const PUBLIC_FILE = /\.(.*)$/
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Always allow auth API routes and static files
+  // API routes and public/static files must answer directly.
+  // Redirecting fetches/assets to /login turns auth expiration into broken UI.
   if (
-    pathname.startsWith('/api/auth/') ||
+    pathname.startsWith('/api/') ||
     pathname.startsWith('/_next/') ||
-    pathname.startsWith('/favicon')
+    pathname.startsWith('/favicon') ||
+    pathname === '/site.webmanifest' ||
+    pathname === '/manifest.json' ||
+    PUBLIC_FILE.test(pathname)
   ) {
     return NextResponse.next()
   }

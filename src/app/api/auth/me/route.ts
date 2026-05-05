@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { FITMARK_BASE_URL, endpoints } from '@/lib/api/endpoints'
-import { clearTokenCookies, getTokens, refreshTokenPair, setTokenCookies } from '@/lib/auth'
+import { getTokens, refreshTokenPair, setTokenCookies } from '@/lib/auth'
+
+export const dynamic = 'force-dynamic'
 
 export async function GET() {
   let { access, refresh } = getTokens()
@@ -12,9 +14,7 @@ export async function GET() {
   if (!access && refresh) {
     const tokens = await refreshTokenPair(refresh)
     if (!tokens) {
-      const res = NextResponse.json({ message: 'Sessão expirada' }, { status: 401 })
-      clearTokenCookies(res)
-      return res
+      return NextResponse.json({ message: 'Sessão expirada' }, { status: 401 })
     }
     access = tokens.accessToken
     refresh = tokens.refreshToken
@@ -22,19 +22,19 @@ export async function GET() {
 
   let upstream = await fetch(`${FITMARK_BASE_URL}${endpoints.me}`, {
     headers: { Authorization: `Bearer ${access}` },
+    cache: 'no-store',
   })
 
   if ((upstream.status === 401 || upstream.status === 403) && refresh) {
     const tokens = await refreshTokenPair(refresh)
     if (!tokens) {
-      const res = NextResponse.json({ message: 'Sessão expirada' }, { status: 401 })
-      clearTokenCookies(res)
-      return res
+      return NextResponse.json({ message: 'Sessão expirada' }, { status: 401 })
     }
     access = tokens.accessToken
     refresh = tokens.refreshToken
     upstream = await fetch(`${FITMARK_BASE_URL}${endpoints.me}`, {
       headers: { Authorization: `Bearer ${access}` },
+      cache: 'no-store',
     })
   }
 

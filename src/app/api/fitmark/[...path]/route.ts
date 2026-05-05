@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { FITMARK_BASE_URL } from '@/lib/api/endpoints'
-import { clearTokenCookies, getTokens, refreshTokenPair, setTokenCookies } from '@/lib/auth'
+import { getTokens, refreshTokenPair, setTokenCookies } from '@/lib/auth'
 
 type Params = { params: { path: string[] } }
+
+export const dynamic = 'force-dynamic'
 
 async function proxyRequest(req: NextRequest, { params }: Params) {
   const path = '/' + params.path.join('/')
@@ -18,9 +20,7 @@ async function proxyRequest(req: NextRequest, { params }: Params) {
   if (!access && refresh) {
     const tokens = await refreshTokenPair(refresh)
     if (!tokens) {
-      const res = NextResponse.json({ message: 'Sessão expirada' }, { status: 401 })
-      clearTokenCookies(res)
-      return res
+      return NextResponse.json({ message: 'Sessão expirada' }, { status: 401 })
     }
     access = tokens.accessToken
     refresh = tokens.refreshToken
@@ -33,7 +33,12 @@ async function proxyRequest(req: NextRequest, { params }: Params) {
       ? await req.text()
       : undefined
 
-  let upstream = await fetch(url, { method: req.method, headers, body })
+  let upstream = await fetch(url, {
+    method: req.method,
+    headers,
+    body,
+    cache: 'no-store',
+  })
 
   // Auto-refresh on expired/invalid access token.
   if ((upstream.status === 401 || upstream.status === 403) && refresh) {
@@ -42,7 +47,12 @@ async function proxyRequest(req: NextRequest, { params }: Params) {
       access = tokens.accessToken
       refresh = tokens.refreshToken
       headers['Authorization'] = `Bearer ${access}`
-      upstream = await fetch(url, { method: req.method, headers, body })
+      upstream = await fetch(url, {
+        method: req.method,
+        headers,
+        body,
+        cache: 'no-store',
+      })
     }
   }
 
