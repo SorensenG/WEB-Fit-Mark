@@ -2,21 +2,34 @@ import { NextRequest, NextResponse } from 'next/server'
 import { sha256 } from 'js-sha256'
 import { FITMARK_BASE_URL, endpoints } from '@/lib/api/endpoints'
 import { setTokenCookies } from '@/lib/auth'
+import {
+  getAppUrl,
+  getGoogleClientConfig,
+  getGoogleRedirectUri,
+} from '@/lib/google-oauth'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl
   const code = searchParams.get('code')
   const error = searchParams.get('error')
 
-  const appUrl = process.env.NEXTAUTH_URL ?? 'http://localhost:3000'
+  const appUrl = getAppUrl()
 
   if (error || !code) {
     return NextResponse.redirect(`${appUrl}/login?error=google_cancelled`)
   }
 
-  const clientId = process.env.GOOGLE_CLIENT_ID!
-  const clientSecret = process.env.GOOGLE_CLIENT_SECRET!
-  const redirectUri = `${appUrl}/api/auth/google/callback`
+  const { clientId, clientSecret, isConfigured } = getGoogleClientConfig()
+  const redirectUri = getGoogleRedirectUri()
+
+  if (!isConfigured || !clientId || !clientSecret) {
+    console.error('Google OAuth env vars are missing', {
+      hasClientId: Boolean(clientId),
+      hasClientSecret: Boolean(clientSecret),
+      redirectUri,
+    })
+    return NextResponse.redirect(`${appUrl}/login?error=google_token_failed`)
+  }
 
   // Exchange code for Google tokens
   const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
@@ -32,6 +45,13 @@ export async function GET(req: NextRequest) {
   })
 
   if (!tokenRes.ok) {
+    const errorBody = await tokenRes.text().catch(() => '')
+    console.error('Google token exchange failed', {
+      status: tokenRes.status,
+      redirectUri,
+      clientIdSuffix: clientId.slice(-12),
+      body: errorBody.slice(0, 500),
+    })
     return NextResponse.redirect(`${appUrl}/login?error=google_token_failed`)
   }
 

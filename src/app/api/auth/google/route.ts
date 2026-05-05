@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server'
+import { getGoogleClientConfig, getGoogleRedirectUri } from '@/lib/google-oauth'
 
 export async function GET() {
-  const clientId = process.env.GOOGLE_CLIENT_ID
+  const { clientId } = getGoogleClientConfig()
   if (!clientId) {
     return NextResponse.json(
       { message: 'GOOGLE_CLIENT_ID não configurado' },
@@ -9,7 +10,7 @@ export async function GET() {
     )
   }
 
-  const redirectUri = `${process.env.NEXTAUTH_URL ?? 'http://localhost:3000'}/api/auth/google/callback`
+  const redirectUri = getGoogleRedirectUri()
 
   const params = new URLSearchParams({
     client_id: clientId,
