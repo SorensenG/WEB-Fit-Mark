@@ -20,14 +20,14 @@ export function BottomNav() {
     href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-light-outline dark:border-dark-outline bg-light-surface dark:bg-dark-surface">
+    <nav className="fitmark-bottom-safe lg:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-light-outline/80 dark:border-dark-outline/80 bg-light-surface/95 dark:bg-dark-surface/95 shadow-[0_-8px_30px_rgba(15,15,20,0.08)] backdrop-blur">
       <div className="flex">
         {items.map(({ icon: Icon, label, href }) => (
           <Link
             key={href}
             href={href}
             className={cn(
-              'flex-1 flex flex-col items-center gap-1 py-2.5 text-xs transition-colors',
+              'flex-1 flex min-h-[58px] flex-col items-center justify-center gap-1 px-1 text-[11px] font-semibold transition-colors',
               isActive(href)
                 ? 'text-light-primary dark:text-dark-primary'
                 : 'text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant',

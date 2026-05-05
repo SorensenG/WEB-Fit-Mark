@@ -507,27 +507,28 @@ export default function ExerciseDetailPage() {
 
   return (
     <div className="flex h-full flex-col bg-light-bg text-light-onBg dark:bg-dark-bg dark:text-dark-onBg">
-      <header className="flex items-center gap-3 px-4 pb-3 pt-5">
+      <header className="fitmark-header">
         <button
           type="button"
           onClick={() => router.back()}
-          className="rounded-xl p-2 text-light-onSurface dark:text-dark-onSurface"
+          className="fitmark-back-button"
+          aria-label="Voltar"
         >
-          <ArrowLeft size={26} />
+          <ArrowLeft size={22} />
         </button>
-        <h1 className="min-w-0 flex-1 truncate text-center font-rajdhani text-2xl font-bold text-light-onSurface dark:text-dark-onSurface">
+        <h1 className="min-w-0 flex-1 truncate font-rajdhani text-xl font-bold text-light-onSurface dark:text-dark-onSurface sm:text-center sm:text-2xl">
           {exerciseName}
         </h1>
         <button
           type="button"
           onClick={() => setShowHistory(true)}
-          className="whitespace-nowrap text-sm font-bold text-light-primary dark:text-dark-primary"
+          className="whitespace-nowrap rounded-xl px-2 py-2 text-sm font-bold text-light-primary transition-colors hover:bg-light-primaryContainer dark:text-dark-primary dark:hover:bg-dark-primaryContainer"
         >
           Ver Histórico
         </button>
       </header>
 
-      <main className="flex-1 overflow-y-auto px-4 pb-8">
+      <main className="flex-1 overflow-y-auto px-4 pb-28 lg:pb-8">
         {maxWeight > 0 && (
           <div className="mb-8 mt-3 inline-flex min-w-[252px] flex-col rounded-xl border border-light-primary/40 bg-light-primary/10 px-4 py-3 text-light-primary dark:border-dark-primary/40 dark:bg-dark-primary/10 dark:text-dark-primary">
             <div className="flex items-center gap-1.5">
@@ -681,7 +682,7 @@ export default function ExerciseDetailPage() {
         <button
           type="button"
           onClick={() => router.back()}
-          className="mt-6 flex h-14 w-full items-center justify-center gap-2 rounded-2xl border-2 border-light-primary text-base font-bold text-light-primary dark:border-dark-primary dark:text-dark-primary"
+          className="mt-6 flex h-14 w-full items-center justify-center gap-2 rounded-2xl border-2 border-light-primary bg-light-surface text-base font-bold text-light-primary shadow-sm dark:border-dark-primary dark:bg-dark-surface dark:text-dark-primary"
         >
           <CheckCircle size={22} />
           Concluir

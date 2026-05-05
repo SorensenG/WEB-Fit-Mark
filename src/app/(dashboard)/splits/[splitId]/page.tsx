@@ -24,13 +24,14 @@ export default function SplitDetailPage() {
   }
 
   return (
-    <div className="flex flex-col h-full">
-      <header className="px-4 pt-5 pb-3 flex items-center gap-3">
+    <div className="flex h-full flex-col">
+      <header className="fitmark-header">
         <Link
           href="/"
-          className="p-2 rounded-xl hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant transition-colors"
+          className="fitmark-back-button"
+          aria-label="Voltar"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft size={22} />
         </Link>
         <h1 className="font-rajdhani font-bold text-xl flex-1 text-light-onSurface dark:text-dark-onSurface truncate">
           {isLoading ? '...' : (split?.title || 'Divisão')}
@@ -43,7 +44,7 @@ export default function SplitDetailPage() {
         </Link>
       </header>
 
-      <div className="flex-1 overflow-y-auto px-4 space-y-3 pb-4">
+      <div className="flex-1 overflow-y-auto px-4 space-y-3 pb-24 lg:pb-4">
         {isLoading ? (
           Array.from({ length: 3 }).map((_, i) => <SkeletonCard key={i} />)
         ) : isError ? (

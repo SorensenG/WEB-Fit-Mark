@@ -294,10 +294,10 @@ export default function WorkoutDetailPage() {
   }
 
   return (
-    <div className="flex flex-col h-full">
-      <header className="px-4 pt-5 pb-3 flex items-center gap-3">
-        <Link href={`/splits/${splitId}`} className="p-2 rounded-xl hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant">
-          <ArrowLeft size={20} />
+    <div className="flex h-full flex-col">
+      <header className="fitmark-header">
+        <Link href={`/splits/${splitId}`} className="fitmark-back-button" aria-label="Voltar">
+          <ArrowLeft size={22} />
         </Link>
         <div className="flex-1 min-w-0">
           <h1 className="font-rajdhani font-bold text-xl text-light-onSurface dark:text-dark-onSurface truncate">
@@ -306,7 +306,7 @@ export default function WorkoutDetailPage() {
           {wtype && <p className="text-xs font-semibold" style={{ color: wtype.color }}>{wtype.label}</p>}
         </div>
         {workout && (
-          <button onClick={() => setShowWorkoutSettings(true)} className="p-2 rounded-xl hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant">
+          <button onClick={() => setShowWorkoutSettings(true)} className="fitmark-icon-button" aria-label="Configurações do treino">
             <Settings2 size={20} />
           </button>
         )}
@@ -314,7 +314,7 @@ export default function WorkoutDetailPage() {
 
       {notes && <p className="px-4 pb-3 text-sm text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant">{notes}</p>}
 
-      <div className="flex-1 overflow-y-auto px-4 space-y-2 pb-4">
+      <div className="flex-1 overflow-y-auto px-4 space-y-2 pb-24 lg:pb-4">
         {isLoading ? (
           Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)
         ) : isError ? (
@@ -393,7 +393,7 @@ export default function WorkoutDetailPage() {
             })}
 
             {showAddExercise ? (
-              <form onSubmit={handleAddExercise} className="grid grid-cols-[1fr_88px_auto_auto] gap-2 pt-1">
+              <form onSubmit={handleAddExercise} className="grid grid-cols-1 gap-2 pt-1 sm:grid-cols-[1fr_88px_auto_auto]">
                 <input autoFocus value={exerciseName} onChange={(e) => setExerciseName(e.target.value)} placeholder="Nome do exercício" className="min-w-0 px-3 py-2 rounded-xl text-sm bg-light-surfaceVariant dark:bg-dark-surfaceVariant border border-light-primary dark:border-dark-primary text-light-onSurface dark:text-dark-onSurface focus:outline-none" />
                 <input value={exerciseSets} onChange={(e) => setExerciseSets(e.target.value)} type="number" min="1" className="px-3 py-2 rounded-xl text-sm bg-light-surfaceVariant dark:bg-dark-surfaceVariant border border-light-primary dark:border-dark-primary text-light-onSurface dark:text-dark-onSurface focus:outline-none" />
                 <button type="submit" disabled={createExercise.isPending} className="px-4 py-2 rounded-xl bg-light-primary dark:bg-dark-primary text-white text-sm font-medium disabled:opacity-50">
@@ -412,7 +412,7 @@ export default function WorkoutDetailPage() {
       </div>
 
       {!isLoading && !isError && localExercises.length > 0 && (
-        <div className="px-4 pb-6 pt-2">
+        <div className="sticky bottom-[calc(72px+env(safe-area-inset-bottom))] z-10 px-4 pb-3 pt-2 lg:static lg:pb-6">
           <Button fullWidth onClick={handleStartSession} isLoading={startSession.isPending || abandonSession.isPending} className="gap-2 h-14 text-base">
             <Play size={18} />
             Iniciar Sessão

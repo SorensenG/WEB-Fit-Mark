@@ -27,13 +27,14 @@ export default function CreateWorkoutPage() {
   }
 
   return (
-    <div className="max-w-lg mx-auto px-4 pt-6">
-      <div className="flex items-center gap-3 mb-8">
+    <div className="fitmark-page max-w-lg">
+      <div className="fitmark-header">
         <Link
           href={`/splits/${splitId}`}
-          className="p-2 rounded-xl hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant"
+          className="fitmark-back-button"
+          aria-label="Voltar"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft size={22} />
         </Link>
         <h1 className="font-rajdhani font-bold text-2xl text-light-onSurface dark:text-dark-onSurface">
           Novo Treino

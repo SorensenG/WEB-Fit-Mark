@@ -23,13 +23,14 @@ export default function CreateSplitPage() {
   }
 
   return (
-    <div className="max-w-lg mx-auto px-4 pt-6">
-      <div className="flex items-center gap-3 mb-8">
+    <div className="fitmark-page max-w-lg">
+      <div className="fitmark-header">
         <Link
           href="/"
-          className="p-2 rounded-xl hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant transition-colors"
+          className="fitmark-back-button"
+          aria-label="Voltar"
         >
-          <ArrowLeft size={20} className="text-light-onSurface dark:text-dark-onSurface" />
+          <ArrowLeft size={22} />
         </Link>
         <h1 className="font-rajdhani font-bold text-2xl text-light-onSurface dark:text-dark-onSurface">
           Nova Divisão

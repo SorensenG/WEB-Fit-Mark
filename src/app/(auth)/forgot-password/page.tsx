@@ -64,12 +64,12 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="py-8">
+    <div className="py-6">
       <Link
         href="/login"
-        className="flex items-center gap-1.5 text-sm text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant hover:text-light-primary dark:hover:text-dark-primary mb-8"
+        className="mb-8 inline-flex min-h-11 items-center gap-2 rounded-2xl border border-light-outline bg-light-surface px-3 text-sm font-semibold text-light-primary shadow-sm transition-colors hover:bg-light-primaryContainer dark:border-dark-outline dark:bg-dark-surface dark:text-dark-primary dark:hover:bg-dark-primaryContainer"
       >
-        <ArrowLeft size={16} />
+        <ArrowLeft size={18} />
         Voltar ao login
       </Link>
 

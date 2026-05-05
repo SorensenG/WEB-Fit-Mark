@@ -16,6 +16,13 @@
 
   body {
     font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100dvh;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button,
+  a {
+    touch-action: manipulation;
   }
 
   ::-webkit-scrollbar {
@@ -26,6 +33,28 @@
   }
   ::-webkit-scrollbar-thumb {
     @apply rounded-full bg-light-outline dark:bg-dark-outline;
+  }
+}
+
+@layer components {
+  .fitmark-page {
+    @apply mx-auto w-full max-w-2xl px-4 pb-24 pt-4 sm:px-6 sm:pt-6 lg:max-w-5xl lg:pb-8;
+  }
+
+  .fitmark-header {
+    @apply sticky top-0 z-20 -mx-4 mb-4 flex min-h-[64px] items-center gap-3 border-b border-light-outline/70 bg-light-bg/95 px-4 py-3 backdrop-blur dark:border-dark-outline/70 dark:bg-dark-bg/95 sm:static sm:mx-0 sm:mb-6 sm:min-h-0 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-none;
+  }
+
+  .fitmark-back-button {
+    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-light-outline bg-light-surface text-light-primary shadow-sm transition-colors hover:bg-light-primaryContainer focus:outline-none focus:ring-2 focus:ring-light-primary dark:border-dark-outline dark:bg-dark-surface dark:text-dark-primary dark:hover:bg-dark-primaryContainer dark:focus:ring-dark-primary;
+  }
+
+  .fitmark-icon-button {
+    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-transparent text-light-onSurface transition-colors hover:border-light-outline hover:bg-light-surface dark:text-dark-onSurface dark:hover:border-dark-outline dark:hover:bg-dark-surface;
+  }
+
+  .fitmark-bottom-safe {
+    padding-bottom: max(0.625rem, env(safe-area-inset-bottom));
   }
 }
 
