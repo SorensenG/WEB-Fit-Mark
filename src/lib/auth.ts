@@ -9,6 +9,8 @@ type TokenPair = {
   refreshToken: string
 }
 
+const refreshRequests = new Map<string, Promise<TokenPair | null>>()
+
 export function getTokens() {
   const store = cookies()
   return {
@@ -53,6 +55,20 @@ export async function refreshTokenPair(
     currentRefreshToken ?? cookies().get(REFRESH_COOKIE)?.value
   if (!refreshToken) return null
 
+  const pendingRefresh = refreshRequests.get(refreshToken)
+  if (pendingRefresh) return pendingRefresh
+
+  const refreshRequest = requestTokenRefresh(refreshToken).finally(() => {
+    refreshRequests.delete(refreshToken)
+  })
+
+  refreshRequests.set(refreshToken, refreshRequest)
+  return refreshRequest
+}
+
+async function requestTokenRefresh(
+  refreshToken: string,
+): Promise<TokenPair | null> {
   try {
     const res = await fetch(`${FITMARK_BASE_URL}${endpoints.refresh}`, {
       method: 'POST',

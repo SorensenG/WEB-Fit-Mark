@@ -45,7 +45,7 @@ async function request<T>(
     credentials: 'include',
   })
 
-  if (res.status === 401 && retryOnUnauthorized) {
+  if ((res.status === 401 || res.status === 403) && retryOnUnauthorized) {
     const refreshed = await refreshSession()
     if (refreshed) {
       return request<T>(path, options, false)
