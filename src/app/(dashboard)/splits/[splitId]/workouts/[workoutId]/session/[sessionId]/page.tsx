@@ -30,7 +30,31 @@ export default function ActiveSessionPage() {
     if (raw) setStoredSession(JSON.parse(raw))
   }, [sessionId])
 
-  const mergedSession = session?.exercises?.length ? session : storedSession ?? session
+  const storedExercises: any[] =
+    storedSession?.workoutExercises ?? storedSession?.exercises ?? []
+  const sessionExercises: any[] = session?.exercises ?? []
+  const exercises: any[] = storedExercises.length
+    ? storedExercises.map((templateExercise: any) => {
+        const templateId = String(templateExercise.exerciseId ?? templateExercise.id ?? '')
+        const loggedExercise = sessionExercises.find(
+          (exercise: any) =>
+            String(exercise.exerciseId ?? exercise.id ?? '') === templateId,
+        )
+
+        return {
+          ...templateExercise,
+          ...loggedExercise,
+          sets: Array.isArray(loggedExercise?.sets)
+            ? loggedExercise.sets
+            : templateExercise.sets,
+          plannedSets:
+            templateExercise.plannedSets ??
+            (typeof templateExercise.sets === 'number' ? templateExercise.sets : undefined) ??
+            loggedExercise?.plannedSets,
+        }
+      })
+    : sessionExercises
+  const mergedSession = session ?? storedSession
   const startedAt = mergedSession?.startedAt ?? mergedSession?.workoutDate
   const elapsed = useWorkoutTimer(startedAt)
 
@@ -62,11 +86,6 @@ export default function ActiveSessionPage() {
     router.push(`/splits/${splitId}/workouts/${workoutId}`)
   }
 
-  // SessionDetails uses "exercises" array with ExerciseWithSetsResponse
-  // StartWorkOutSession uses "workoutExercises" — handle both
-  const exercises: any[] = mergedSession?.exercises?.length
-    ? mergedSession.exercises
-    : mergedSession?.workoutExercises ?? []
   const title: string = mergedSession?.workoutName ?? mergedSession?.workoutTitle ?? 'Sessão'
 
   return (

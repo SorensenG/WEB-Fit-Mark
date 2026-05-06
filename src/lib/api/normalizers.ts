@@ -26,9 +26,11 @@ export function normalizeExercise(raw: any): Exercise {
   const normalizedSets = Array.isArray(rawSets)
     ? rawSets.map(normalizeSet)
     : undefined
-  const plannedSets = Array.isArray(rawSets)
-    ? rawSets.length
-    : toNumber(rawSets, toNumber(raw?.plannedSets))
+  const plannedSets = raw?.plannedSets != null
+    ? toNumber(raw.plannedSets)
+    : Array.isArray(rawSets)
+      ? rawSets.length
+      : toNumber(rawSets)
 
   return {
     id,
@@ -89,4 +91,3 @@ export function normalizeSession(raw: any): WorkoutSession {
     notes: raw?.notes,
   }
 }
-

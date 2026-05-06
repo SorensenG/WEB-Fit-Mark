@@ -38,6 +38,12 @@ export default function HomePage() {
     await deleteSplit.mutateAsync(splitId)
   }
 
+  async function handleForceLogout() {
+    await fetch('/api/auth/logout', { method: 'POST' })
+    router.push('/login')
+    router.refresh()
+  }
+
   const activeSessionIds = activeSession
     ? {
         splitId: (activeSession as any).splitId ?? '',
@@ -104,12 +110,20 @@ export default function HomePage() {
             <p className="text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant">
               Erro ao carregar divisões
             </p>
-            <button
-              onClick={() => refetch()}
-              className="text-sm text-light-primary dark:text-dark-primary hover:underline"
-            >
-              Tentar novamente
-            </button>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <button
+                onClick={() => refetch()}
+                className="rounded-xl bg-light-primary px-4 py-2 text-sm font-semibold text-white dark:bg-dark-primary"
+              >
+                Tentar novamente
+              </button>
+              <button
+                onClick={handleForceLogout}
+                className="rounded-xl border border-light-outline px-4 py-2 text-sm font-semibold text-light-onSurface dark:border-dark-outline dark:text-dark-onSurface"
+              >
+                Sair
+              </button>
+            </div>
           </div>
         ) : splits?.length === 0 ? (
           <div className="flex flex-col items-center py-16 gap-4">
