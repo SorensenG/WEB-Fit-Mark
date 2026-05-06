@@ -222,7 +222,7 @@ function RestTimerWidget({
           className={`flex items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-bold transition-colors ${
             mode === 'stopwatch'
               ? 'bg-light-secondary dark:bg-dark-secondary text-black'
-              : 'text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant'
+              : 'text-light-onSurfaceVariant dark:text-[#B9B8D3] hover:text-light-primary dark:hover:text-dark-secondary'
           }`}
         >
           {mode === 'stopwatch' && <Check size={17} />}
@@ -235,7 +235,7 @@ function RestTimerWidget({
           className={`flex items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-bold transition-colors ${
             mode === 'countdown'
               ? 'bg-light-secondary dark:bg-dark-secondary text-black'
-              : 'text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant'
+              : 'text-light-onSurfaceVariant dark:text-[#B9B8D3] hover:text-light-primary dark:hover:text-dark-secondary'
           }`}
         >
           {mode === 'countdown' && <Check size={17} />}
@@ -378,7 +378,8 @@ function ExerciseHistoryModal({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-xl p-2 text-light-onSurfaceVariant hover:bg-light-surfaceVariant dark:text-dark-onSurfaceVariant dark:hover:bg-dark-surfaceVariant"
+            className="fitmark-muted-action"
+            aria-label="Fechar histórico"
           >
             <X size={18} />
           </button>
@@ -612,7 +613,7 @@ export default function ExerciseDetailPage() {
                   className={`h-[54px] min-w-[85px] rounded-xl border px-4 text-base font-semibold transition-colors ${
                     selected
                       ? 'border-transparent text-white'
-                      : 'border-light-outline bg-transparent text-light-onSurfaceVariant dark:border-dark-outline dark:text-dark-onSurfaceVariant'
+                      : 'border-light-outline bg-transparent text-light-onSurfaceVariant hover:border-light-primary hover:text-light-primary dark:border-dark-outline dark:text-[#B9B8D3] dark:hover:border-dark-secondary/50 dark:hover:text-dark-secondary'
                   }`}
                   style={selected ? { backgroundColor: type.color } : undefined}
                 >

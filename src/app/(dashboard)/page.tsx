@@ -188,9 +188,10 @@ export default function HomePage() {
                   <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={() => startEdit(split)}
-                      className="p-1.5 rounded-lg hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant"
+                      className="fitmark-muted-action"
+                      aria-label="Editar divisão"
                     >
-                      <Edit2 size={14} className="text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant" />
+                      <Edit2 size={14} />
                     </button>
                     <button
                       onClick={() => handleDelete(split.splitId)}
@@ -203,8 +204,8 @@ export default function HomePage() {
                       )}
                     </button>
                   </div>
-                  <Link href={`/splits/${split.splitId}`}>
-                    <ChevronRight size={18} className="text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant" />
+                  <Link href={`/splits/${split.splitId}`} className="fitmark-muted-action" aria-label="Abrir divisão">
+                    <ChevronRight size={18} />
                   </Link>
                 </div>
               )}

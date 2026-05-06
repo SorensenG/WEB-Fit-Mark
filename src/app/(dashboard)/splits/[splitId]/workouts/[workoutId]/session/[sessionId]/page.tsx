@@ -131,7 +131,9 @@ export default function ActiveSessionPage() {
                     {loggedSets.length > 0 && (
                       <CheckCircle size={18} className="text-green-500 flex-shrink-0" />
                     )}
-                    <ChevronRight size={18} className="text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant flex-shrink-0" />
+                    <span className="fitmark-muted-action">
+                      <ChevronRight size={18} />
+                    </span>
                   </div>
                 </Card>
               </Link>

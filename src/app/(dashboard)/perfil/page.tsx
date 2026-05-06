@@ -132,12 +132,12 @@ export default function PerfilPage() {
           {/* Theme toggle */}
           <button
             onClick={toggle}
-            className="w-full flex items-center gap-3 px-4 py-4 hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant transition-colors"
+            className="w-full flex items-center gap-3 px-4 py-4 hover:bg-light-surfaceVariant dark:hover:bg-dark-primaryContainer/35 transition-colors"
           >
             {theme === 'dark' ? (
-              <Sun size={20} className="text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant" />
+              <Sun size={20} className="text-light-primary dark:text-dark-secondary" />
             ) : (
-              <Moon size={20} className="text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant" />
+              <Moon size={20} className="text-light-primary dark:text-dark-secondary" />
             )}
             <span className="text-sm text-light-onSurface dark:text-dark-onSurface">
               {theme === 'dark' ? 'Modo claro' : 'Modo escuro'}

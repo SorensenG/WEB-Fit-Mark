@@ -30,7 +30,7 @@ export function BottomNav() {
               'flex-1 flex min-h-[58px] flex-col items-center justify-center gap-1 px-1 text-[11px] font-semibold transition-colors',
               isActive(href)
                 ? 'text-light-primary dark:text-dark-primary'
-                : 'text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant',
+                : 'text-light-onSurfaceVariant dark:text-[#B9B8D3] hover:text-light-primary dark:hover:text-dark-secondary',
             )}
           >
             <Icon size={20} />

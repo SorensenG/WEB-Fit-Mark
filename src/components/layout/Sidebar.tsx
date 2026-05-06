@@ -55,7 +55,7 @@ export function Sidebar({ onNewSplit }: { onNewSplit?: () => void }) {
               'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors',
               isActive(href)
                 ? 'bg-light-primaryContainer dark:bg-dark-primaryContainer text-light-primary dark:text-dark-primary'
-                : 'text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant',
+                : 'text-light-onSurfaceVariant dark:text-[#B9B8D3] hover:bg-light-surfaceVariant hover:text-light-primary dark:hover:bg-dark-primaryContainer/35 dark:hover:text-dark-secondary',
             )}
           >
             <Icon size={18} />
@@ -77,7 +77,7 @@ export function Sidebar({ onNewSplit }: { onNewSplit?: () => void }) {
         )}
         <button
           onClick={toggle}
-          className="flex items-center gap-2 w-full px-3 py-2 rounded-xl text-sm text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant transition-colors"
+          className="flex items-center gap-2 w-full px-3 py-2 rounded-xl text-sm text-light-onSurfaceVariant dark:text-[#B9B8D3] hover:bg-light-surfaceVariant hover:text-light-primary dark:hover:bg-dark-primaryContainer/35 dark:hover:text-dark-secondary transition-colors"
         >
           {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
           {theme === 'dark' ? 'Modo claro' : 'Modo escuro'}

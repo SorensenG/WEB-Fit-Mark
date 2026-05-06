@@ -121,8 +121,12 @@ export default function SplitDetailPage() {
                         <Trash2 size={14} className="text-red-500" />
                       )}
                     </button>
-                    <Link href={`/splits/${splitId}/workouts/${workout.workoutId}`}>
-                      <ChevronRight size={18} className="text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant" />
+                    <Link
+                      href={`/splits/${splitId}/workouts/${workout.workoutId}`}
+                      className="fitmark-muted-action"
+                      aria-label="Abrir treino"
+                    >
+                      <ChevronRight size={18} />
                     </Link>
                   </div>
                 </div>

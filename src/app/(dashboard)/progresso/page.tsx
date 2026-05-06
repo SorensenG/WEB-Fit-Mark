@@ -151,11 +151,9 @@ function SessionCard({ session }: { session: any }) {
               <span className="text-xs">{duration}min</span>
             </div>
           )}
-          {expanded ? (
-            <ChevronUp size={16} className="text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant" />
-          ) : (
-            <ChevronDown size={16} className="text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant" />
-          )}
+          <span className="fitmark-muted-action">
+            {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+          </span>
         </div>
 
         {expanded && (

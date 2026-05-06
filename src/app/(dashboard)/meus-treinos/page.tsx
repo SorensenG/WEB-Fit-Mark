@@ -70,7 +70,9 @@ export default function MeusTreinosPage() {
                         {workout.exercises?.length ?? 0} exercícios
                       </p>
                     </div>
-                    <ChevronRight size={18} className="text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant" />
+                    <span className="fitmark-muted-action">
+                      <ChevronRight size={18} />
+                    </span>
                   </div>
                 </Card>
               </Link>

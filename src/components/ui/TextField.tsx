@@ -33,7 +33,7 @@ export function TextField({
       )}
       <div className="relative flex items-center">
         {prefixIcon && (
-          <span className="absolute left-3 text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant">
+          <span className="absolute left-3 text-light-onSurfaceVariant dark:text-[#B9B8D3]">
             {prefixIcon}
           </span>
         )}
@@ -49,7 +49,7 @@ export function TextField({
           {...props}
         />
         {suffixIcon && (
-          <span className="absolute right-3 text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant">
+          <span className="absolute right-3 text-light-onSurfaceVariant dark:text-[#B9B8D3]">
             {suffixIcon}
           </span>
         )}

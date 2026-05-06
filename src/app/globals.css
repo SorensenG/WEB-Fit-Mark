@@ -46,11 +46,15 @@
   }
 
   .fitmark-back-button {
-    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-light-outline bg-light-surface text-light-primary shadow-sm transition-colors hover:bg-light-primaryContainer focus:outline-none focus:ring-2 focus:ring-light-primary dark:border-dark-outline dark:bg-dark-surface dark:text-dark-primary dark:hover:bg-dark-primaryContainer dark:focus:ring-dark-primary;
+    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-light-outline bg-light-surface text-light-primary shadow-sm transition-colors hover:bg-light-primaryContainer focus:outline-none focus:ring-2 focus:ring-light-primary dark:border-dark-primary/50 dark:bg-dark-primaryContainer/45 dark:text-dark-secondary dark:shadow-[0_0_0_1px_rgba(124,92,252,0.12)] dark:hover:border-dark-secondary/70 dark:hover:bg-dark-primaryContainer dark:focus:ring-dark-primary;
   }
 
   .fitmark-icon-button {
-    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-transparent text-light-onSurface transition-colors hover:border-light-outline hover:bg-light-surface dark:text-dark-onSurface dark:hover:border-dark-outline dark:hover:bg-dark-surface;
+    @apply inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-transparent text-light-primary transition-colors hover:border-light-primary/30 hover:bg-light-primaryContainer focus:outline-none focus:ring-2 focus:ring-light-primary dark:text-dark-secondary dark:hover:border-dark-secondary/40 dark:hover:bg-dark-primaryContainer/55 dark:focus:ring-dark-secondary;
+  }
+
+  .fitmark-muted-action {
+    @apply inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-light-onSurfaceVariant transition-colors hover:bg-light-surfaceVariant hover:text-light-primary focus:outline-none focus:ring-2 focus:ring-light-primary dark:text-[#B9B8D3] dark:hover:bg-dark-primaryContainer/45 dark:hover:text-dark-secondary dark:focus:ring-dark-secondary;
   }
 
   .fitmark-bottom-safe {

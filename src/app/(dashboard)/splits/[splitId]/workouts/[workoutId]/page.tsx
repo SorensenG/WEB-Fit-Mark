@@ -71,7 +71,7 @@ function ExerciseHistoryModal({
               Histórico de séries
             </p>
           </div>
-          <button onClick={onClose} className="p-2 rounded-lg hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant">
+          <button onClick={onClose} className="fitmark-muted-action" aria-label="Fechar histórico">
             <X size={18} />
           </button>
         </div>
@@ -352,7 +352,7 @@ export default function WorkoutDetailPage() {
                       draggable={!!exId && !reorderExercises.isPending}
                       onDragStart={(event) => handleDragStart(event, ex)}
                       onDragEnd={handleDragEnd}
-                      className="p-1 -ml-1 rounded-lg cursor-grab active:cursor-grabbing touch-none text-light-onSurfaceVariant dark:text-dark-onSurfaceVariant hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant flex-shrink-0"
+                      className="fitmark-muted-action -ml-1 cursor-grab active:cursor-grabbing touch-none"
                       title="Arrastar para reordenar"
                       aria-label="Arrastar exercício para reordenar"
                     >
@@ -374,13 +374,13 @@ export default function WorkoutDetailPage() {
                       </div>
                     )}
                     <div className="flex items-center gap-1">
-                      <button onClick={() => moveExercise(idx, -1)} disabled={idx === 0} className="p-1.5 rounded-lg hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant disabled:opacity-30">
+                      <button onClick={() => moveExercise(idx, -1)} disabled={idx === 0} className="fitmark-muted-action disabled:opacity-30" aria-label="Mover exercício para cima">
                         <ArrowUp size={14} />
                       </button>
-                      <button onClick={() => moveExercise(idx, 1)} disabled={idx === localExercises.length - 1} className="p-1.5 rounded-lg hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant disabled:opacity-30">
+                      <button onClick={() => moveExercise(idx, 1)} disabled={idx === localExercises.length - 1} className="fitmark-muted-action disabled:opacity-30" aria-label="Mover exercício para baixo">
                         <ArrowDown size={14} />
                       </button>
-                      <button onClick={() => setEditingExercise(ex)} className="p-1.5 rounded-lg hover:bg-light-surfaceVariant dark:hover:bg-dark-surfaceVariant">
+                      <button onClick={() => setEditingExercise(ex)} className="fitmark-muted-action" aria-label="Editar exercício">
                         <Settings2 size={14} />
                       </button>
                       <button onClick={() => deleteExercise.mutate({ splitId, workoutId, exerciseId: exId })} className="p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30">
